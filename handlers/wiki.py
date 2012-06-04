@@ -19,9 +19,9 @@ class EditPage(TemplateHandler):
         self.render('edit_page.html', page=page, page_id=page_id)
 
     @authenticate
-    def post(self, *args):
-        page_id = self.request.get('page_id')
-        page = models.Page.get_or_insert(page_id)
+    def post(self, page_id):
+        #page_id = self.request.get('page_id')
+        page = models.Page(key_name=page_id)
         page.content = self.request.get('content')
         page.put()
         logging.error("I'm redirecting to %s" % page_id)
